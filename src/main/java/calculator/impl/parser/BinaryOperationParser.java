@@ -4,7 +4,7 @@ import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.BinaryOperatorLexeme;
 import calculator.impl.lexeme.Lexeme;
 import calculator.impl.operator.BinaryOperator;
-import calculator.impl.operator.BinaryOperatorFactory;
+import calculator.impl.operator.testName.BinaryOperatorFactory;
 
 public class BinaryOperationParser implements ExpressionParser {
 

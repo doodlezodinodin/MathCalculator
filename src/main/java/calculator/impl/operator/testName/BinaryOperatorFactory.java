@@ -1,4 +1,6 @@
-package calculator.impl.operator;
+package calculator.impl.operator.testName;
+
+import calculator.impl.operator.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,6 @@ public class BinaryOperatorFactory {
 
 
     public BinaryOperator getOperator(String representation) {
-        //*
         return operators.get(representation);
     }
 

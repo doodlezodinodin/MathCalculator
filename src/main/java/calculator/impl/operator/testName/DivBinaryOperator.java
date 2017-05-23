@@ -1,4 +1,6 @@
-package calculator.impl.operator;
+package calculator.impl.operator.testName;
+
+import calculator.impl.operator.BinaryOperator;
 
 public class DivBinaryOperator implements BinaryOperator {
     @Override

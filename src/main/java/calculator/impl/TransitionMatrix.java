@@ -12,8 +12,8 @@ public class TransitionMatrix {
 
     private final Map<State, Set<State>> transitions = new HashMap<State, Set<State>>() {
         {
-            put(START, of(NUMBER));
-            put(NUMBER, of(BINARY_OPERATOR, FINISH));
+            put(START, of(NUMBER, OPEN_BRACKET));
+            put(NUMBER, of(BINARY_OPERATOR, CLOSE_BRACKET, FINISH));
             put(BINARY_OPERATOR, of(NUMBER, OPEN_BRACKET));
             put(OPEN_BRACKET, of(NUMBER, OPEN_BRACKET));
             put(CLOSE_BRACKET, of(BINARY_OPERATOR, CLOSE_BRACKET, FINISH));

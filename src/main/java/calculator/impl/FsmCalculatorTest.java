@@ -27,4 +27,10 @@ public class FsmCalculatorTest {
         Double result = calculator.evaluate("2*2+2");
         assertEquals(6, result, 0);
     }
+
+    @Test
+    public void EvaluateBracket() throws EvaluationException{
+        Double result = calculator.evaluate("(2+2*2+2)");
+        assertEquals(8, result, 0);
+    }
 }

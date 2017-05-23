@@ -1,10 +1,11 @@
 package calculator.impl;
 
-import calculator.impl.lexeme.BinaryOperatorLexeme;
-import calculator.impl.lexeme.FinishLexeme;
-import calculator.impl.lexeme.LexemeVisitor;
-import calculator.impl.lexeme.NumberLexeme;
+import calculator.impl.lexeme.*;
 import calculator.impl.operator.*;
+import calculator.impl.operator.testName.DivBinaryOperator;
+import calculator.impl.operator.testName.MinusBinaryOperator;
+import calculator.impl.operator.testName.MulBinaryOperator;
+import calculator.impl.operator.testName.PlusBinaryOperator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -31,8 +32,6 @@ public class EvaluationVisitor implements LexemeVisitor {
             evaluateTopOperator();
             operators.push(operator);
         } else operators.push(operator);
-
-
     }
 
     @Override
@@ -40,6 +39,12 @@ public class EvaluationVisitor implements LexemeVisitor {
         while (!operators.isEmpty()) {
             evaluateTopOperator();
         }
+    }
+
+    @Override
+    public void visit(BracketLexeme lexeme) {
+        //final BinaryOperator bracket = lexeme.getBracket();
+        //operators.push(bracket);
     }
 
     private void evaluateTopOperator() {

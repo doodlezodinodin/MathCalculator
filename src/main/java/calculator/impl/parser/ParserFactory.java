@@ -5,15 +5,15 @@ import calculator.impl.State;
 import java.util.HashMap;
 import java.util.Map;
 
-import static calculator.impl.State.BINARY_OPERATOR;
-import static calculator.impl.State.FINISH;
-import static calculator.impl.State.NUMBER;
+import static calculator.impl.State.*;
 
 public class ParserFactory {
 
     private final Map<State, ExpressionParser> parsers = new HashMap<State, ExpressionParser>(){{
         put(NUMBER, new NumberParser());
         put(BINARY_OPERATOR, new BinaryOperationParser());
+        put(OPEN_BRACKET, new BracketParser());
+        put(CLOSE_BRACKET, new BracketParser());
         put(FINISH, new FinishParser());
     }};
 
