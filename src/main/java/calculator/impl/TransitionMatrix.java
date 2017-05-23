@@ -14,7 +14,9 @@ public class TransitionMatrix {
         {
             put(START, of(NUMBER));
             put(NUMBER, of(BINARY_OPERATOR, FINISH));
-            put(BINARY_OPERATOR, of(NUMBER));
+            put(BINARY_OPERATOR, of(NUMBER, OPEN_BRACKET));
+            put(OPEN_BRACKET, of(NUMBER, OPEN_BRACKET));
+            put(CLOSE_BRACKET, of(BINARY_OPERATOR, CLOSE_BRACKET, FINISH));
             put(FINISH, noneOf(State.class));
         }
     };

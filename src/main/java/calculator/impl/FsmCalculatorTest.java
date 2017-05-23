@@ -22,4 +22,9 @@ public class FsmCalculatorTest {
         assertEquals(26, result, 0);
     }
 
+    @Test
+    public void EvaluateExpression() throws EvaluationException{
+        Double result = calculator.evaluate("2*2+2");
+        assertEquals(6, result, 0);
+    }
 }

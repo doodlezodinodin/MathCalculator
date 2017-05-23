@@ -9,10 +9,13 @@ public class BinaryOperatorFactory {
     private final Map<String, BinaryOperator> operators = new HashMap<String, BinaryOperator>() {{
         put("+", new PlusBinaryOperator());
         put("-", new MinusBinaryOperator());
+        put("*", new MulBinaryOperator());
+        put("/", new DivBinaryOperator());
     }};
 
 
     public BinaryOperator getOperator(String representation) {
+        //*
         return operators.get(representation);
     }
 

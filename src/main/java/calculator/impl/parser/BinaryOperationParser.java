@@ -27,7 +27,6 @@ public class BinaryOperationParser implements ExpressionParser {
                 final BinaryOperator operator = factory.getOperator(representation);
 
                 return new BinaryOperatorLexeme(operator);
-
             }
         }
 
