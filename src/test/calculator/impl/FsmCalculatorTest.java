@@ -2,7 +2,7 @@ package calculator.impl;
 
 import calculator.Calculator;
 import calculator.EvaluationException;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,14 +23,20 @@ public class FsmCalculatorTest {
     }
 
     @Test
-    public void EvaluateExpression() throws EvaluationException{
+    public void EvaluatePriority() throws EvaluationException {
         Double result = calculator.evaluate("2*2+2");
         assertEquals(6, result, 0);
     }
 
     @Test
-    public void EvaluateBracket() throws EvaluationException{
+    public void EvaluateBracket() throws EvaluationException {
         Double result = calculator.evaluate("(2+2*2+2)");
+        assertEquals(8, result, 0);
+    }
+
+    @Test
+    public void EvaluateExpression() throws EvaluationException {
+        Double result = calculator.evaluate("(2+2)*2");
         assertEquals(8, result, 0);
     }
 }

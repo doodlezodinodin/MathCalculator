@@ -1,4 +1,4 @@
-package calculator.impl.operator.testName;
+package calculator.impl.operator.binaryOperator;
 
 import calculator.impl.operator.BinaryOperator;
 

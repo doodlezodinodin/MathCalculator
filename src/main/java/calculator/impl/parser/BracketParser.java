@@ -21,7 +21,6 @@ public class BracketParser implements ExpressionParser {
 
         for (String repression : factory.getRepresentations()) {
             if (remainingExpression.startsWith(repression)) {
-
                 reader.moveParsePosition(repression.length());
 
                 final BinaryOperator bracket = factory.getBracket(repression);
