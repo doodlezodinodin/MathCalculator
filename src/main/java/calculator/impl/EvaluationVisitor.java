@@ -1,7 +1,7 @@
 package calculator.impl;
 
 import calculator.impl.lexeme.*;
-import calculator.impl.operator.*;
+import calculator.impl.operator.BinaryOperator;
 import calculator.impl.operator.binaryOperator.DivBinaryOperator;
 import calculator.impl.operator.binaryOperator.MinusBinaryOperator;
 import calculator.impl.operator.binaryOperator.MulBinaryOperator;
@@ -16,6 +16,8 @@ public class EvaluationVisitor implements LexemeVisitor {
 
     private final Deque<BinaryOperator> operators = new ArrayDeque<>();
 
+    private int priority = 0;
+
     @Override
     public void visit(NumberLexeme lexeme) {
         operands.push(lexeme.getValue());
@@ -26,7 +28,7 @@ public class EvaluationVisitor implements LexemeVisitor {
         final BinaryOperator operator = lexeme.getOperator();
 
         // todo: support priorities
-        priority(operator);
+        evaluatePriority(operator);
     }
 
     @Override
@@ -37,8 +39,13 @@ public class EvaluationVisitor implements LexemeVisitor {
     }
 
     @Override
-    public void visit(BracketLexeme lexeme) {
+    public void visit(OpenBracketLexeme lexeme) {
+        priority = 3;
+    }
 
+    @Override
+    public void visit(CloseBracketLexeme lexeme) {
+        evaluateTopOperator();
     }
 
     private void evaluateTopOperator() {
@@ -56,7 +63,7 @@ public class EvaluationVisitor implements LexemeVisitor {
         return operands.pop();
     }
 
-    private int priorityOperator(BinaryOperator operator) {
+    private int findPriority(BinaryOperator operator) {
         if (operator instanceof PlusBinaryOperator || operator instanceof MinusBinaryOperator) {
             return 2;
         } else if (operator instanceof MulBinaryOperator || operator instanceof DivBinaryOperator) {
@@ -64,14 +71,21 @@ public class EvaluationVisitor implements LexemeVisitor {
         } else return -2;
     }
 
-    private void priority(BinaryOperator operator) {
-        if (operators.isEmpty()) operators.push(operator);
-        else if (priorityOperator(operator) == priorityOperator(operators.getFirst())) {
+    private void evaluatePriority(BinaryOperator operator) {
+
+        if (operators.isEmpty()) {
+            operators.push(operator);
+            priority = findPriority(operator);
+        } else if (findPriority(operator) < priority) {
+            operators.push(operator);
+            priority = findPriority(operator);
+        } else if (findPriority(operator) > priority) {
+            evaluateTopOperator();
+            priority = findPriority(operator);
+            operators.push(operator);
+        } else if (findPriority(operator) == priority) {
             evaluateTopOperator();
             operators.push(operator);
-        } else if (priorityOperator(operator) > priorityOperator(operators.getFirst())) {
-            evaluateTopOperator();
-            operators.push(operator);
-        } else operators.push(operator);
+        }
     }
 }

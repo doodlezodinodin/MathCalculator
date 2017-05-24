@@ -8,6 +8,8 @@ public interface LexemeVisitor {
 
     void visit(FinishLexeme lexeme);
 
-    void visit(BracketLexeme lexeme);
+    void visit(OpenBracketLexeme lexeme);
+
+    void visit(CloseBracketLexeme lexeme);
 
 }

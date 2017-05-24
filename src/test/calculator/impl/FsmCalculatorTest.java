@@ -36,7 +36,7 @@ public class FsmCalculatorTest {
 
     @Test
     public void EvaluateExpression() throws EvaluationException {
-        Double result = calculator.evaluate("(2+2)*2");
-        assertEquals(8, result, 0);
+        Double result = calculator.evaluate("(2+2)+(5*3)-7");
+        assertEquals(12, result, 0);
     }
 }

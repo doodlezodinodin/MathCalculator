@@ -2,12 +2,11 @@ package calculator.impl.parser;
 
 
 import calculator.impl.ExpressionReader;
-import calculator.impl.lexeme.BracketLexeme;
+import calculator.impl.lexeme.CloseBracketLexeme;
 import calculator.impl.lexeme.Lexeme;
-import calculator.impl.operator.BinaryOperator;
 import calculator.impl.operator.bracket.BracketFactory;
 
-public class BracketParser implements ExpressionParser {
+public class CloseBracketParse implements ExpressionParser{
 
     private final BracketFactory factory = new BracketFactory();
 
@@ -23,8 +22,8 @@ public class BracketParser implements ExpressionParser {
             if (remainingExpression.startsWith(repression)) {
                 reader.moveParsePosition(repression.length());
 
-                final BinaryOperator bracket = factory.getBracket(repression);
-                return new BracketLexeme(bracket);
+                final String bracket = factory.getBracket(repression);
+                return new CloseBracketLexeme(bracket);
             }
         }
 
