@@ -1,4 +1,4 @@
-package calculator.impl.operator.constant;
+package calculator.impl.parser.constantParser;
 
 
 import java.util.HashMap;

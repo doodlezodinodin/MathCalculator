@@ -1,6 +1,6 @@
 package calculator.impl.lexeme;
 
-import calculator.impl.operator.BinaryOperator;
+import calculator.impl.operator.binaryOperator.BinaryOperator;
 
 public class BinaryOperatorLexeme implements Lexeme {
 

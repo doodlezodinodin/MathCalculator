@@ -1,7 +1,5 @@
 package calculator.impl.operator.binaryOperator;
 
-import calculator.impl.operator.BinaryOperator;
-
 public class MulBinaryOperator implements BinaryOperator {
 
     @Override

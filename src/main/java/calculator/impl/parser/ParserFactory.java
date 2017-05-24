@@ -6,6 +6,7 @@ import calculator.impl.parser.bracketParser.CloseBracketParse;
 import calculator.impl.parser.bracketParser.OpenBracketParser;
 import calculator.impl.parser.constantParser.ConstantParser;
 import calculator.impl.parser.finishParser.FinishParser;
+import calculator.impl.parser.mathMethodParser.MathMethodParser;
 import calculator.impl.parser.numberParser.NumberParser;
 
 import java.util.HashMap;
@@ -16,11 +17,19 @@ import static calculator.impl.State.*;
 public class ParserFactory {
 
     private final Map<State, ExpressionParser> parsers = new HashMap<State, ExpressionParser>(){{
+
         put(NUMBER, new NumberParser());
+
         put(CONSTANT, new ConstantParser());
+
         put(BINARY_OPERATOR, new BinaryOperationParser());
+
+        put(MATH_METHOD, new MathMethodParser());
+
         put(OPEN_BRACKET, new OpenBracketParser());
+
         put(CLOSE_BRACKET, new CloseBracketParse());
+
         put(FINISH, new FinishParser());
     }};
 

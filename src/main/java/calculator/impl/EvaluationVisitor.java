@@ -3,7 +3,8 @@ package calculator.impl;
 import calculator.impl.lexeme.*;
 import calculator.impl.lexeme.bracketLexeme.CloseBracketLexeme;
 import calculator.impl.lexeme.bracketLexeme.OpenBracketLexeme;
-import calculator.impl.operator.BinaryOperator;
+import calculator.impl.lexeme.mathMethodLexeme.MathMethodLexeme;
+import calculator.impl.operator.binaryOperator.BinaryOperator;
 import calculator.impl.operator.binaryOperator.DivBinaryOperator;
 import calculator.impl.operator.binaryOperator.MinusBinaryOperator;
 import calculator.impl.operator.binaryOperator.MulBinaryOperator;
@@ -57,6 +58,11 @@ public class EvaluationVisitor implements LexemeVisitor {
     @Override
     public void visit(ConstantLexeme lexeme) {
         operands.push(lexeme.getValue());
+    }
+
+    @Override
+    public void visit(MathMethodLexeme lexeme) {
+
     }
 
     private void evaluateTopOperator() {

@@ -1,7 +1,5 @@
 package calculator.impl.operator.binaryOperator;
 
-import calculator.impl.operator.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
