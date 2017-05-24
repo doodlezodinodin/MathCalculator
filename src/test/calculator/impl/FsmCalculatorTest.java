@@ -39,4 +39,10 @@ public class FsmCalculatorTest {
         Double result = calculator.evaluate("(2+2)+(5*3)-7");
         assertEquals(12, result, 0);
     }
+
+    @Test
+    public void EvaluatePi() throws EvaluationException {
+        Double result = calculator.evaluate("2+Pi");
+        assertEquals(5.14, result, 0.5);
+    }
 }

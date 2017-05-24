@@ -48,6 +48,11 @@ public class EvaluationVisitor implements LexemeVisitor {
         evaluateTopOperator();
     }
 
+    @Override
+    public void visit(ConstantLexeme lexeme) {
+        operands.push(lexeme.getValue());
+    }
+
     private void evaluateTopOperator() {
 
         final BinaryOperator operator = operators.pop();

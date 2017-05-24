@@ -11,6 +11,7 @@ public class ParserFactory {
 
     private final Map<State, ExpressionParser> parsers = new HashMap<State, ExpressionParser>(){{
         put(NUMBER, new NumberParser());
+        put(CONSTANT, new ConstantParser());
         put(BINARY_OPERATOR, new BinaryOperationParser());
         put(OPEN_BRACKET, new OpenBracketParser());
         put(CLOSE_BRACKET, new CloseBracketParse());
