@@ -1,6 +1,8 @@
 package calculator.impl;
 
 import calculator.impl.lexeme.*;
+import calculator.impl.lexeme.bracketLexeme.CloseBracketLexeme;
+import calculator.impl.lexeme.bracketLexeme.OpenBracketLexeme;
 import calculator.impl.operator.BinaryOperator;
 import calculator.impl.operator.binaryOperator.DivBinaryOperator;
 import calculator.impl.operator.binaryOperator.MinusBinaryOperator;
@@ -46,6 +48,10 @@ public class EvaluationVisitor implements LexemeVisitor {
     @Override
     public void visit(CloseBracketLexeme lexeme) {
         evaluateTopOperator();
+
+        if (!operators.isEmpty()) {
+            priority = findPriority(operators.getFirst());
+        } else priority = 0;
     }
 
     @Override

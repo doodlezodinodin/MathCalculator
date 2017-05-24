@@ -1,10 +1,11 @@
-package calculator.impl.parser;
+package calculator.impl.parser.constantParser;
 
 
 import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.ConstantLexeme;
 import calculator.impl.lexeme.Lexeme;
 import calculator.impl.operator.constant.ConstantFactory;
+import calculator.impl.parser.ExpressionParser;
 
 public class ConstantParser implements ExpressionParser {
 

@@ -1,8 +1,9 @@
-package calculator.impl.parser;
+package calculator.impl.parser.finishParser;
 
 import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.FinishLexeme;
 import calculator.impl.lexeme.Lexeme;
+import calculator.impl.parser.ExpressionParser;
 
 public class FinishParser implements ExpressionParser {
 
