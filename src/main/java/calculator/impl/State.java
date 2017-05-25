@@ -9,7 +9,7 @@ public enum State {
 
     BINARY_OPERATOR,
 
-    OPEN_BRACKET, CLOSE_BRACKET,
+    OPEN_BRACKET, CLOSE_BRACKET, COMMA,
 
     FINISH
 }

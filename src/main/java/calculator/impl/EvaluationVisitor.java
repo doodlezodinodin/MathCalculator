@@ -1,5 +1,6 @@
 package calculator.impl;
 
+import calculator.impl.function.Function;
 import calculator.impl.lexeme.*;
 import calculator.impl.lexeme.CloseBracketLexeme;
 import calculator.impl.lexeme.OpenBracketLexeme;
@@ -11,6 +12,8 @@ import java.util.Deque;
 public class EvaluationVisitor implements LexemeVisitor {
 
     private final Deque<Double> operands = new ArrayDeque<>();
+
+    private final Deque<Function> functions = new ArrayDeque<>();
 
     private final Deque<BinaryOperator> operators = new ArrayDeque<>();
 
@@ -28,7 +31,9 @@ public class EvaluationVisitor implements LexemeVisitor {
 
     @Override
     public void visit(FunctionLexeme lexeme) {
+        final Function function = lexeme.getFunction();
 
+        functions.push(function);
     }
 
     @Override
@@ -62,6 +67,11 @@ public class EvaluationVisitor implements LexemeVisitor {
         while (operators.size() > requiredSize) {
             evaluateTopOperator();
         }
+    }
+
+    @Override
+    public void visit(CommaLexeme lexeme) {
+
     }
 
     @Override

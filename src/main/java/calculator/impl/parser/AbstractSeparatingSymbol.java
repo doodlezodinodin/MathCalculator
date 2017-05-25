@@ -4,9 +4,9 @@ import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.Lexeme;
 import calculator.impl.parser.ExpressionParser;
 
-public abstract class AbstractBracketParser implements ExpressionParser {
+public abstract class AbstractSeparatingSymbol implements ExpressionParser {
 
-    private final String[] brackets = {"(", ")"};
+    private final String[] separatingSymbols = {"(", ")", ","};
 
     @Override
     public Lexeme parse(ExpressionReader reader) {
@@ -17,9 +17,9 @@ public abstract class AbstractBracketParser implements ExpressionParser {
         final String remainingExpression = reader.getRemainingExpression();
 
 
-        for (int i = 0; i < brackets.length; i++) {
-            if (remainingExpression.startsWith(brackets[i])) {
-                reader.moveParsePosition(brackets[i].length());
+        for (int i = 0; i < separatingSymbols.length; i++) {
+            if (remainingExpression.startsWith(separatingSymbols[i])) {
+                reader.moveParsePosition(separatingSymbols[i].length());
 
                 return createLexeme();
             }

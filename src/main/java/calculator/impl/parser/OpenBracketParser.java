@@ -3,7 +3,7 @@ package calculator.impl.parser;
 import calculator.impl.lexeme.Lexeme;
 import calculator.impl.lexeme.OpenBracketLexeme;
 
-public class OpenBracketParser extends AbstractBracketParser {
+public class OpenBracketParser extends AbstractSeparatingSymbol {
 
     @Override
     Lexeme createLexeme() {

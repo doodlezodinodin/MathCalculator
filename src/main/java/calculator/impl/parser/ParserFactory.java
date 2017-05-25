@@ -23,6 +23,8 @@ public class ParserFactory {
 
         put(CLOSE_BRACKET, new CloseBracketParser());
 
+        put(COMMA, new CommaParser());
+
         put(FINISH, new FinishParser());
     }};
 

@@ -14,6 +14,8 @@ public interface LexemeVisitor {
 
     void visit(CloseBracketLexeme lexeme);
 
+    void visit(CommaLexeme lexeme);
+
     void visit(FinishLexeme lexeme);
 
 }
