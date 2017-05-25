@@ -55,9 +55,15 @@ public class FsmCalculatorTest {
     }
 
     @Test
-    public void testEvaluatePower() throws EvaluationException {
-        Double result = calculator.evaluate("2+3+((2^2*3+2)+5^2)+2^2/4");
-        assertEquals(45, result, 0);
+    public void testEvaluatePowerBinaryOperation() throws EvaluationException {
+        Double result = calculator.evaluate("2+3+((2^2^2*3+2)+5^2)+2^2/4");
+        assertEquals(81, result, 0);
+    }
+
+    @Test
+    public void testEvaluateFunctionMinNumber() throws EvaluationException {
+        Double result = calculator.evaluate("min(2,3,4)");
+        assertEquals(2, result, 0);
     }
 
     /*@Test

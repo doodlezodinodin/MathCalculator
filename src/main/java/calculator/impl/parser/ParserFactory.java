@@ -15,13 +15,13 @@ public class ParserFactory {
 
         put(CONSTANT, new ConstantParser());
 
-        put(BINARY_OPERATOR, new BinaryOperationParser());
+        put(FUNCTION, new FunctionsParser());
 
-        //put(MATH_METHOD, new MathMethodParser());
+        put(BINARY_OPERATOR, new BinaryOperationParser());
 
         put(OPEN_BRACKET, new OpenBracketParser());
 
-        put(CLOSE_BRACKET, new CloseBracketParse());
+        put(CLOSE_BRACKET, new CloseBracketParser());
 
         put(FINISH, new FinishParser());
     }};

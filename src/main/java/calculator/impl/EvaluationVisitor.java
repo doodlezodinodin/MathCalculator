@@ -27,6 +27,11 @@ public class EvaluationVisitor implements LexemeVisitor {
     }
 
     @Override
+    public void visit(FunctionLexeme lexeme) {
+
+    }
+
+    @Override
     public void visit(BinaryOperatorLexeme lexeme) {
         final BinaryOperator operator = lexeme.getOperator();
 

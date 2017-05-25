@@ -11,8 +11,8 @@ public class BinaryOperatorFactory {
     private final Map<String, BinaryOperator> operators = new HashMap<String, BinaryOperator>() {{
         put("+", new PlusBinaryOperator(LOW));
         put("-", new MinusBinaryOperator(LOW));
-        put("*", new MultiplyBinaryOperator(MEDIOUM));
-        put("/", new DivideBinaryOperator(MEDIOUM));
+        put("*", new MultiplyBinaryOperator(MEDIUM));
+        put("/", new DivideBinaryOperator(MEDIUM));
         put("^", new PowerBinaryOperator(HIGH));
     }};
 

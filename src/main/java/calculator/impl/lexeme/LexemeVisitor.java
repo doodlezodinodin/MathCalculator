@@ -6,13 +6,13 @@ public interface LexemeVisitor {
 
     void visit(ConstantLexeme lexeme);
 
+    void visit(FunctionLexeme lexeme);
+
     void visit(BinaryOperatorLexeme lexeme);
 
     void visit(OpenBracketLexeme lexeme);
 
     void visit(CloseBracketLexeme lexeme);
-
-    //void visit(MathMethodLexeme lexeme);
 
     void visit(FinishLexeme lexeme);
 

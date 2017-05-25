@@ -11,17 +11,17 @@ import static java.util.EnumSet.of;
 public class TransitionMatrix {
 
     private final Map<State, Set<State>> transitions = new HashMap<State, Set<State>>() {{
-        put(START, of(OPEN_BRACKET, NUMBER, CONSTANT));
+        put(START, of(OPEN_BRACKET, NUMBER, CONSTANT, FUNCTION));
 
         put(NUMBER, of(BINARY_OPERATOR, CLOSE_BRACKET, FINISH));
 
         put(CONSTANT, of(BINARY_OPERATOR, CLOSE_BRACKET, FINISH));
 
-        //put(MATH_METHOD, of(BINARY_OPERATOR, CLOSE_BRACKET, FINISH));
+        put(FUNCTION, of(BINARY_OPERATOR, CLOSE_BRACKET, FINISH));
 
-        put(BINARY_OPERATOR, of(OPEN_BRACKET, NUMBER, CONSTANT));
+        put(BINARY_OPERATOR, of(OPEN_BRACKET, NUMBER, CONSTANT, FUNCTION));
 
-        put(OPEN_BRACKET, of(OPEN_BRACKET, NUMBER, CONSTANT));
+        put(OPEN_BRACKET, of(OPEN_BRACKET, NUMBER, CONSTANT, FUNCTION));
 
         put(CLOSE_BRACKET, of(CLOSE_BRACKET, BINARY_OPERATOR, FINISH));
 

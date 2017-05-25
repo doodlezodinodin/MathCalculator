@@ -4,7 +4,7 @@ public interface BinaryOperator {
 
     enum Priority {
         LOW,
-        MEDIOUM,
+        MEDIUM,
         HIGH
     }
 

@@ -4,7 +4,7 @@ import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.Lexeme;
 import calculator.impl.parser.ExpressionParser;
 
-public abstract class AbstractBracketParse implements ExpressionParser {
+public abstract class AbstractBracketParser implements ExpressionParser {
 
     private final String[] brackets = {"(", ")"};
 
