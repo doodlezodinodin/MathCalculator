@@ -54,6 +54,12 @@ public class FsmCalculatorTest {
         assertEquals(5.14, result, 0.5);
     }
 
+    @Test
+    public void testEvaluatePower() throws EvaluationException {
+        Double result = calculator.evaluate("2+3+((2^2*3+2)+5^2)+2^2/4");
+        assertEquals(45, result, 0);
+    }
+
     /*@Test
     public void testBracketWasNotOpen() throws EvaluationException {
         try {

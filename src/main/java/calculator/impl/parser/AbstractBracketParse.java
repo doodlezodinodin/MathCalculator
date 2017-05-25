@@ -1,12 +1,10 @@
 package calculator.impl.parser;
 
-
 import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.Lexeme;
 import calculator.impl.parser.ExpressionParser;
 
-
-public abstract class AbstractBracketParse implements ExpressionParser{
+public abstract class AbstractBracketParse implements ExpressionParser {
 
     private final String[] brackets = {"(", ")"};
 
@@ -20,7 +18,7 @@ public abstract class AbstractBracketParse implements ExpressionParser{
 
 
         for (int i = 0; i < brackets.length; i++) {
-            if (remainingExpression.startsWith(brackets[i])){
+            if (remainingExpression.startsWith(brackets[i])) {
                 reader.moveParsePosition(brackets[i].length());
 
                 return createLexeme();

@@ -1,6 +1,5 @@
 package calculator.impl.operator;
 
-
 public abstract class AbstractBinaryOperator implements BinaryOperator {
 
     private final Priority priority;

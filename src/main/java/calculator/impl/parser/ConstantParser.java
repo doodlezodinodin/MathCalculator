@@ -1,6 +1,5 @@
 package calculator.impl.parser;
 
-
 import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.ConstantLexeme;
 import calculator.impl.lexeme.Lexeme;
@@ -25,7 +24,6 @@ public class ConstantParser implements ExpressionParser {
                 return new ConstantLexeme(constantFactory.getConstant(repression));
             }
         }
-
 
 
         return null;

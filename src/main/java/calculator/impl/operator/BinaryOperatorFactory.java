@@ -13,6 +13,7 @@ public class BinaryOperatorFactory {
         put("-", new MinusBinaryOperator(LOW));
         put("*", new MultiplyBinaryOperator(MEDIOUM));
         put("/", new DivideBinaryOperator(MEDIOUM));
+        put("^", new PowerBinaryOperator(HIGH));
     }};
 
 

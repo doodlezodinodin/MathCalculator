@@ -9,7 +9,7 @@ import static calculator.impl.State.*;
 
 public class ParserFactory {
 
-    private final Map<State, ExpressionParser> parsers = new HashMap<State, ExpressionParser>(){{
+    private final Map<State, ExpressionParser> parsers = new HashMap<State, ExpressionParser>() {{
 
         put(NUMBER, new NumberParser());
 
@@ -26,7 +26,7 @@ public class ParserFactory {
         put(FINISH, new FinishParser());
     }};
 
-    public ExpressionParser getParser(State state){
+    public ExpressionParser getParser(State state) {
         return parsers.get(state);
     }
 

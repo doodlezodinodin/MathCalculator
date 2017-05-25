@@ -6,39 +6,48 @@ import calculator.impl.lexeme.Lexeme;
 import calculator.impl.parser.ExpressionParser;
 import calculator.impl.parser.ParserFactory;
 
+import java.util.logging.Logger;
+
 public class FsmCalculator implements Calculator {
+
+    //private static final Logger LOG = Logger.getLogger(FsmCalculator.class.getName());
 
     private final TransitionMatrix matrix = new TransitionMatrix();
 
     private final ParserFactory parserFactory = new ParserFactory();
 
-    private final EvaluationVisitor visitor = new EvaluationVisitor();
-
-
     @Override
     public double evaluate(String expression) throws EvaluationException {
+
+        final EvaluationVisitor visitor = new EvaluationVisitor();
 
         if (expression == null || expression.isEmpty()) {
             throw new IllegalArgumentException("Expression is null or empty.");
         }
 
+        //LOG.info("expression = " + expression);
+
         final ExpressionReader reader = new ExpressionReader(expression);
 
         State state = State.START;
 
+        //LOG.info("Start state = " + state);
+
         while (state != State.FINISH) {
 
-            state = moveForward(reader, state);
+            state = moveForward(reader, state, visitor);
 
             if (state == null) {
                 throw new EvaluationException("Invalid expression format.", reader.getParsePosition());
             }
+
+            //LOG.info("Move to state = " + state);
         }
 
         return visitor.getResult();
     }
 
-    private State moveForward(ExpressionReader reader, State currentState) {
+    private State moveForward(ExpressionReader reader, State currentState, EvaluationVisitor visitor) {
 
         for (State possibleState : matrix.getPossibleTransitions(currentState)) {
 

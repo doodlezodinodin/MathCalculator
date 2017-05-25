@@ -1,6 +1,5 @@
 package calculator.impl.lexeme;
 
-
 public class ConstantLexeme implements Lexeme {
 
     private final double value;
