@@ -62,8 +62,8 @@ public class FsmCalculatorTest {
 
     @Test
     public void testEvaluateFunctionMinNumber() throws EvaluationException {
-        Double result = calculator.evaluate("min(2,3,4)");
-        assertEquals(2, result, 0);
+        Double result = calculator.evaluate("min(200,35,max(15,5,20,1,3))");
+        assertEquals(20, result, 0);
     }
 
     /*@Test

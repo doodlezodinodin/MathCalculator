@@ -6,7 +6,7 @@ import calculator.impl.lexeme.Lexeme;
 public class CloseBracketParser extends AbstractSeparatingSymbol {
 
     @Override
-    Lexeme createLexeme() {
+    protected Lexeme createLexeme() {
         return new CloseBracketLexeme();
     }
 }

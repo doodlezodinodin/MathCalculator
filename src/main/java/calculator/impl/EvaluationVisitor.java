@@ -50,10 +50,10 @@ public class EvaluationVisitor implements LexemeVisitor {
         operators.push(operator);
     }
 
-
     @Override
     public void visit(OpenBracketLexeme lexeme) {
         brackets.push(operators.size());
+        brackets.push(operands.size());
     }
 
     @Override
@@ -67,11 +67,13 @@ public class EvaluationVisitor implements LexemeVisitor {
         while (operators.size() > requiredSize) {
             evaluateTopOperator();
         }
+        evaluateTopFunction();
+        functions.pop();
     }
 
     @Override
     public void visit(CommaLexeme lexeme) {
-
+        if (operands.size() > brackets.peek()+1) evaluateTopFunction();
     }
 
     @Override
@@ -89,6 +91,16 @@ public class EvaluationVisitor implements LexemeVisitor {
         final Double leftOperand = operands.pop();
 
         final double result = operator.evaluate(leftOperand, rightOperand);
+        operands.push(result);
+    }
+
+    private void evaluateTopFunction() {
+        final Function function = functions.peek();
+
+        final Double rightOperand = operands.pop();
+        final Double leftOperand = operands.pop();
+
+        final double result = function.evaluate(leftOperand, rightOperand);
         operands.push(result);
     }
 

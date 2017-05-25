@@ -1,5 +1,5 @@
 package calculator.impl.function;
 
 public interface Function {
-    double evaluate(Double[] operands);
+    double evaluate(double leftOperands, double rightOperands);
 }
