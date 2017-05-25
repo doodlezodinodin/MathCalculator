@@ -1,4 +1,4 @@
-package calculator.impl.operator.binaryOperator;
+package calculator.impl.operator;
 
 public interface BinaryOperator {
     double evaluate(double leftOperand, double rightOperand);

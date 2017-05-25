@@ -1,4 +1,4 @@
-package calculator.impl.operator.binaryOperator;
+package calculator.impl.operator;
 
 import java.util.HashMap;
 import java.util.Map;

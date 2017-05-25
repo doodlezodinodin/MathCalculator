@@ -1,4 +1,4 @@
-package calculator.impl.operator.binaryOperator;
+package calculator.impl.operator;
 
 public class PlusBinaryOperator implements BinaryOperator {
 

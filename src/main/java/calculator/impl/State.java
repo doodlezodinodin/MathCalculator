@@ -3,7 +3,7 @@ package calculator.impl;
 public enum State {
     START,
 
-    NUMBER, CONSTANT, MATH_METHOD,
+    NUMBER, CONSTANT, //MATH_METHOD,
 
     BINARY_OPERATOR,
 

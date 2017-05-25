@@ -1,4 +1,4 @@
-package calculator.impl.parser.mathMethodParser;
+package calculator.impl.parser;
 
 
 import calculator.impl.ExpressionReader;

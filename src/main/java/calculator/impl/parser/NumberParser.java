@@ -1,4 +1,4 @@
-package calculator.impl.parser.numberParser;
+package calculator.impl.parser;
 
 import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.Lexeme;

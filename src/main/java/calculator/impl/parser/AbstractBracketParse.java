@@ -1,4 +1,4 @@
-package calculator.impl.parser.bracketParser;
+package calculator.impl.parser;
 
 
 import calculator.impl.ExpressionReader;
@@ -6,7 +6,7 @@ import calculator.impl.lexeme.Lexeme;
 import calculator.impl.parser.ExpressionParser;
 
 
-public abstract class BracketParse implements ExpressionParser{
+public abstract class AbstractBracketParse implements ExpressionParser{
 
     private final String[] brackets = {"(", ")"};
 

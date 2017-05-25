@@ -1,11 +1,10 @@
-package calculator.impl.parser.binaryOperationParser;
+package calculator.impl.parser;
 
 import calculator.impl.ExpressionReader;
 import calculator.impl.lexeme.BinaryOperatorLexeme;
 import calculator.impl.lexeme.Lexeme;
-import calculator.impl.operator.binaryOperator.BinaryOperator;
-import calculator.impl.operator.binaryOperator.BinaryOperatorFactory;
-import calculator.impl.parser.ExpressionParser;
+import calculator.impl.operator.BinaryOperator;
+import calculator.impl.operator.BinaryOperatorFactory;
 
 public class BinaryOperationParser implements ExpressionParser {
 

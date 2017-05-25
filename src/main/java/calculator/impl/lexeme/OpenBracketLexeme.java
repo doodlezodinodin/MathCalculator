@@ -1,10 +1,10 @@
-package calculator.impl.lexeme.bracketLexeme;
+package calculator.impl.lexeme;
 
 
 import calculator.impl.lexeme.Lexeme;
 import calculator.impl.lexeme.LexemeVisitor;
 
-public class CloseBracketLexeme implements Lexeme {
+public class OpenBracketLexeme implements Lexeme {
 
     @Override
     public void acceptVisitor(LexemeVisitor visitor) {
