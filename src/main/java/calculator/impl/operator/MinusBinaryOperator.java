@@ -1,6 +1,10 @@
 package calculator.impl.operator;
 
-public class MinusBinaryOperator implements BinaryOperator {
+public class MinusBinaryOperator extends AbstractBinaryOperator {
+
+    public MinusBinaryOperator(Priority priority) {
+        super(priority);
+    }
 
     @Override
     public double evaluate(double leftOperand, double rightOperand) {

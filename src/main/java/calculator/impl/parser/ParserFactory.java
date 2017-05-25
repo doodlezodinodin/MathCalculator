@@ -17,7 +17,7 @@ public class ParserFactory {
 
         put(BINARY_OPERATOR, new BinaryOperationParser());
 
-        put(MATH_METHOD, new MathMethodParser());
+        //put(MATH_METHOD, new MathMethodParser());
 
         put(OPEN_BRACKET, new OpenBracketParser());
 

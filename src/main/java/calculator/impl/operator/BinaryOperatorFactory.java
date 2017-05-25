@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static calculator.impl.operator.BinaryOperator.Priority.*;
+
 public class BinaryOperatorFactory {
 
     private final Map<String, BinaryOperator> operators = new HashMap<String, BinaryOperator>() {{
-        put("+", new PlusBinaryOperator());
-        put("-", new MinusBinaryOperator());
-        put("*", new MulBinaryOperator());
-        put("/", new DivBinaryOperator());
+        put("+", new PlusBinaryOperator(LOW));
+        put("-", new MinusBinaryOperator(LOW));
+        put("*", new MultiplyBinaryOperator(MEDIOUM));
+        put("/", new DivideBinaryOperator(MEDIOUM));
     }};
 
 

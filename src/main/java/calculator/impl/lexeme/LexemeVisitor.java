@@ -1,7 +1,5 @@
 package calculator.impl.lexeme;
 
-import calculator.impl.lexeme.mathMethodLexeme.MathMethodLexeme;
-
 public interface LexemeVisitor {
 
     void visit(NumberLexeme lexeme);
@@ -14,7 +12,7 @@ public interface LexemeVisitor {
 
     void visit(CloseBracketLexeme lexeme);
 
-    void visit(MathMethodLexeme lexeme);
+    //void visit(MathMethodLexeme lexeme);
 
     void visit(FinishLexeme lexeme);
 

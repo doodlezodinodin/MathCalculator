@@ -3,7 +3,6 @@ package calculator.impl;
 import calculator.impl.lexeme.*;
 import calculator.impl.lexeme.CloseBracketLexeme;
 import calculator.impl.lexeme.OpenBracketLexeme;
-import calculator.impl.lexeme.mathMethodLexeme.MathMethodLexeme;
 import calculator.impl.operator.BinaryOperator;
 
 import java.util.ArrayDeque;
@@ -14,6 +13,8 @@ public class EvaluationVisitor implements LexemeVisitor {
     private final Deque<Double> operands = new ArrayDeque<>();
 
     private final Deque<BinaryOperator> operators = new ArrayDeque<>();
+
+    private final Deque<Integer> brackets = new ArrayDeque<>();
 
     @Override
     public void visit(NumberLexeme lexeme) {
@@ -29,8 +30,33 @@ public class EvaluationVisitor implements LexemeVisitor {
     public void visit(BinaryOperatorLexeme lexeme) {
         final BinaryOperator operator = lexeme.getOperator();
 
-        // todo: support priorities
+        final int minOperatorsSize = brackets.isEmpty() ? 0 : brackets.peek();
 
+        while (operators.size() > minOperatorsSize &&
+                operator.getPriority().compareTo(operators.peek().getPriority()) < 1) {
+            evaluateTopOperator();
+        }
+
+        operators.push(operator);
+    }
+
+
+    @Override
+    public void visit(OpenBracketLexeme lexeme) {
+        brackets.push(operators.size());
+    }
+
+    @Override
+    public void visit(CloseBracketLexeme lexeme) {
+
+        if (brackets.isEmpty()) {
+            throw new RuntimeException("");
+        }
+
+        final int requiredSize = brackets.pop();
+        while (operators.size() > requiredSize) {
+            evaluateTopOperator();
+        }
     }
 
     @Override
@@ -38,22 +64,6 @@ public class EvaluationVisitor implements LexemeVisitor {
         while (!operators.isEmpty()) {
             evaluateTopOperator();
         }
-    }
-
-    @Override
-    public void visit(OpenBracketLexeme lexeme) {
-
-    }
-
-    @Override
-    public void visit(CloseBracketLexeme lexeme) {
-
-    }
-
-
-    @Override
-    public void visit(MathMethodLexeme lexeme) {
-
     }
 
     private void evaluateTopOperator() {
