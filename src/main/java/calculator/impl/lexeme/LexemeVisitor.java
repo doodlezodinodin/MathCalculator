@@ -1,5 +1,7 @@
 package calculator.impl.lexeme;
 
+import calculator.EvaluationException;
+
 public interface LexemeVisitor {
 
     void visit(NumberLexeme lexeme);
@@ -12,7 +14,7 @@ public interface LexemeVisitor {
 
     void visit(OpenBracketLexeme lexeme);
 
-    void visit(CloseBracketLexeme lexeme);
+    void visit(CloseBracketLexeme lexeme) throws EvaluationException;
 
     void visit(CommaLexeme lexeme);
 

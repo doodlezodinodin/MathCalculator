@@ -61,12 +61,49 @@ public class FsmCalculatorTest {
     }
 
     @Test
-    public void testEvaluateFunctionMinNumber() throws EvaluationException {
-        Double result = calculator.evaluate("min(200,35,max(15,5,20,1,3))");
-        assertEquals(20, result, 0);
+    public void testEvaluateMinFunction() throws EvaluationException {
+        Double result = calculator.evaluate("min(5)");
+        assertEquals(5, result, 0);
     }
 
-    /*@Test
+    @Test
+    public void testEvaluateFunctionMinPositiveIntegerNumber() throws EvaluationException {
+        Double result = calculator.evaluate("min(max(1,max(2,4,7,2),0,2),min(2,min(0,1),4,6))");
+        assertEquals(0, result, 0);
+    }
+
+    @Test
+    public void testEvaluateFunctionMinNegativeIntegerNumber() throws EvaluationException {
+        Double result = calculator.evaluate("min(-7,25,-56)");
+        assertEquals(-56, result, 0);
+    }
+
+    @Test
+    public void testEvaluateFunctionMaxPositiveDoubleNumber() throws EvaluationException {
+        Double result = calculator.evaluate("max(7.2,25.20,56.123)");
+        assertEquals(56.123, result, 0);
+    }
+
+    @Test
+    public void testEvaluateFunctionMaxNegativeDoubleNumber() throws EvaluationException {
+        Double result = calculator.evaluate("max(-7.2,25.20,-56.123)");
+        assertEquals(25.20, result, 0);
+    }
+
+    @Test
+    public void testEvaluateFunctionInExpression() throws EvaluationException {
+        Double result = calculator.evaluate("min(max(1,max(2,4,7,2),0,2),min(2,min(0,1),4,6))+25-5+100/5+e");
+        assertEquals(42.71, result, 0);
+    }
+
+    @Test
+    public void testEvaluateFunctionSum() throws EvaluationException {
+        Double result = calculator.evaluate("sum(1,2,min(15,10,20))");
+        assertEquals(13, result, 0);
+    }
+
+
+    @Test
     public void testBracketWasNotOpen() throws EvaluationException {
         try {
             calculator.evaluate("2+2)");
@@ -74,11 +111,11 @@ public class FsmCalculatorTest {
         } catch (EvaluationException e) {
             assertEquals("Wrong error position.", 4, e.getErrorPosition());
         }
-    }*/
+    }
 
     @Test
     public void testDoSanityCheck() throws EvaluationException {
-        Double result = calculator.evaluate("(2+2)*((5*3)+3)");
-        assertEquals(72, result, 0);
+        Double result = calculator.evaluate("2");
+        assertEquals(2, result, 1);
     }
 }

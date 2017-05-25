@@ -1,5 +1,6 @@
 package calculator.impl;
 
+import calculator.EvaluationException;
 import calculator.impl.function.Function;
 import calculator.impl.lexeme.*;
 import calculator.impl.lexeme.CloseBracketLexeme;
@@ -53,27 +54,30 @@ public class EvaluationVisitor implements LexemeVisitor {
     @Override
     public void visit(OpenBracketLexeme lexeme) {
         brackets.push(operators.size());
-        brackets.push(operands.size());
+        if (!functions.isEmpty()) brackets.push(operands.size());
     }
 
     @Override
-    public void visit(CloseBracketLexeme lexeme) {
+    public void visit(CloseBracketLexeme lexeme) throws EvaluationException{
 
         if (brackets.isEmpty()) {
-            throw new RuntimeException("");
+            throw new EvaluationException("Error", 4);
         }
 
         final int requiredSize = brackets.pop();
         while (operators.size() > requiredSize) {
             evaluateTopOperator();
         }
-        evaluateTopFunction();
-        functions.pop();
+
+        if (!functions.isEmpty()) {
+            evaluateTopFunction();
+            functions.pop();
+        }
     }
 
     @Override
     public void visit(CommaLexeme lexeme) {
-        if (operands.size() > brackets.peek()+1) evaluateTopFunction();
+        if (operands.size() > brackets.peek() + 1) evaluateTopFunction();
     }
 
     @Override

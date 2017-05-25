@@ -47,7 +47,7 @@ public class FsmCalculator implements Calculator {
         return visitor.getResult();
     }
 
-    private State moveForward(ExpressionReader reader, State currentState, EvaluationVisitor visitor) {
+    private State moveForward(ExpressionReader reader, State currentState, EvaluationVisitor visitor) throws EvaluationException{
 
         for (State possibleState : matrix.getPossibleTransitions(currentState)) {
 
