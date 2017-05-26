@@ -7,8 +7,7 @@ import calculator.impl.lexeme.CloseBracketLexeme;
 import calculator.impl.lexeme.OpenBracketLexeme;
 import calculator.impl.operator.BinaryOperator;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 public class EvaluationVisitor implements LexemeVisitor {
 
@@ -19,6 +18,9 @@ public class EvaluationVisitor implements LexemeVisitor {
     private final Deque<BinaryOperator> operators = new ArrayDeque<>();
 
     private final Deque<Integer> brackets = new ArrayDeque<>();
+
+    private final Deque<Integer> comma = new ArrayDeque<>();
+
 
     @Override
     public void visit(NumberLexeme lexeme) {
@@ -32,9 +34,7 @@ public class EvaluationVisitor implements LexemeVisitor {
 
     @Override
     public void visit(FunctionLexeme lexeme) {
-        final Function function = lexeme.getFunction();
-
-        functions.push(function);
+        functions.push(lexeme.getFunction());
     }
 
     @Override
@@ -58,10 +58,10 @@ public class EvaluationVisitor implements LexemeVisitor {
     }
 
     @Override
-    public void visit(CloseBracketLexeme lexeme) throws EvaluationException{
+    public void visit(CloseBracketLexeme lexeme) throws EvaluationException {
 
         if (brackets.isEmpty()) {
-            throw new EvaluationException("Error", 4);
+            throw new EvaluationException("Error", operands.size() + operators.size());
         }
 
         final int requiredSize = brackets.pop();
@@ -70,14 +70,25 @@ public class EvaluationVisitor implements LexemeVisitor {
         }
 
         if (!functions.isEmpty()) {
-            evaluateTopFunction();
-            functions.pop();
+            if (!comma.isEmpty()) {
+                evaluateTopBinaryFunction();
+
+                functions.pop();
+                brackets.pop();
+            } else {
+                evaluateTopUnaryFunction();
+                brackets.pop();
+            }
         }
     }
 
     @Override
     public void visit(CommaLexeme lexeme) {
-        if (operands.size() > brackets.peek() + 1) evaluateTopFunction();
+        comma.push(1);
+        if (operands.size() > brackets.peek() + 1) {
+            evaluateTopBinaryFunction();
+            comma.pop();
+        }
     }
 
     @Override
@@ -98,13 +109,22 @@ public class EvaluationVisitor implements LexemeVisitor {
         operands.push(result);
     }
 
-    private void evaluateTopFunction() {
+    private void evaluateTopBinaryFunction() {
         final Function function = functions.peek();
 
-        final Double rightOperand = operands.pop();
-        final Double leftOperand = operands.pop();
+        double firstOperand = operands.pop();
+        double secondOperand = operands.pop();
 
-        final double result = function.evaluate(leftOperand, rightOperand);
+        final double result = function.evaluate(firstOperand, secondOperand);
+        operands.push(result);
+    }
+
+    private void evaluateTopUnaryFunction() {
+        final Function function = functions.pop();
+
+        double operand = operands.pop();
+
+        final double result = function.evaluate(operand);
         operands.push(result);
     }
 

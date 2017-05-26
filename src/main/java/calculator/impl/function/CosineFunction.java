@@ -1,16 +1,14 @@
 package calculator.impl.function;
 
-public class MinNumberFunction implements Function {
+public class CosineFunction implements Function {
 
     @Override
     public double evaluate(double operand) {
-        return operand;
+        return Math.cos(operand);
     }
 
     @Override
     public double evaluate(double firstOperand, double secondOperand) {
-
-        if (firstOperand < secondOperand) return firstOperand;
-        else return secondOperand;
+        return 0;
     }
 }

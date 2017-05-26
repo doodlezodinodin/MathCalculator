@@ -11,6 +11,8 @@ public class FunctionsFactory {
         put("min", new MinNumberFunction());
         put("max", new MaxNumberFunction());
         put("sum", new SumNumberFunction());
+        put("cos", new CosineFunction());
+        put("sin", new SinusFunction());
     }};
 
     public Function getFunction(String representation) {
