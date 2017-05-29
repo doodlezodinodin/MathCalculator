@@ -73,7 +73,7 @@ public class EvaluationVisitor implements LexemeVisitor {
             evaluateTopOperator();
         }
 
-        while (!functions.isEmpty() && functions.size() > functions.size() - 1 && operands.size() > requiredSize + 1) {
+        while (functions.size() > functions.size() - 1 && operands.size() > requiredSize + 1) {
             evaluateTopBinaryFunction();
             if (operands.size() == requiredSize + 1) {
                 functions.pop();

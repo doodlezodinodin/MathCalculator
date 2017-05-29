@@ -52,7 +52,7 @@ public class FunctionsTest {
     }
 
     @Test
-    public void test() throws EvaluationException {
+    public void testEvaluateCorrectnessOfFunction() throws EvaluationException {
         try {
             calculator.evaluate("sum(5,,)");
             fail();
@@ -145,7 +145,7 @@ public class FunctionsTest {
 
     @Test
     public void testFunctionNestedInFunction() throws EvaluationException {
-        double result = calculator.evaluate("sum(min(100, 200), max(250, sum(100, 100, 100, 100, 100)), sum(100, 100))");
+        double result = calculator.evaluate("sum(min(100, 200), max(250, sum(100, 100, max(50, 100), 100, 100)), sum(100, 100))");
         assertEquals(result, 800, 0);
     }
 }
