@@ -29,6 +29,8 @@ public class FsmCalculator implements Calculator {
 
         final ExpressionReader reader = new ExpressionReader(expression);
 
+        visitor.setReader(reader);
+
         State state = State.START;
 
         //LOG.info("Start state = " + state);
@@ -43,6 +45,9 @@ public class FsmCalculator implements Calculator {
 
             //LOG.info("Move to state = " + state);
         }
+
+        if (state == State.FINISH && reader.getRemainingExpression().length() > 0)
+            throw new EvaluationException("Invalid character after open bracket. [error position: " + reader.getParsePosition() + "]" , reader.getParsePosition());
 
         return visitor.getResult();
     }

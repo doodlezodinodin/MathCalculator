@@ -19,8 +19,11 @@ public class EvaluationVisitor implements LexemeVisitor {
 
     private final Deque<Integer> brackets = new ArrayDeque<>();
 
-    private final Deque<Integer> comma = new ArrayDeque<>();
+    private ExpressionReader reader;
 
+    public void setReader(ExpressionReader reader) {
+        this.reader = reader;
+    }
 
     @Override
     public void visit(NumberLexeme lexeme) {
@@ -53,46 +56,42 @@ public class EvaluationVisitor implements LexemeVisitor {
 
     @Override
     public void visit(OpenBracketLexeme lexeme) {
-        brackets.push(operators.size());
         if (!functions.isEmpty()) brackets.push(operands.size());
+        else brackets.push(operators.size());
+
     }
 
     @Override
     public void visit(CloseBracketLexeme lexeme) throws EvaluationException {
-
         if (brackets.isEmpty()) {
-            throw new EvaluationException("Error", operands.size() + operators.size());
+            throw new EvaluationException("Invalid number of parentheses.", reader.getParsePosition());
         }
 
         final int requiredSize = brackets.pop();
+
         while (operators.size() > requiredSize) {
             evaluateTopOperator();
         }
 
-        if (!functions.isEmpty()) {
-            if (!comma.isEmpty()) {
-                evaluateTopBinaryFunction();
-
+        while (!functions.isEmpty() && functions.size() > functions.size() - 1 && operands.size() > requiredSize + 1) {
+            evaluateTopBinaryFunction();
+            if (operands.size() == requiredSize + 1) {
                 functions.pop();
-                brackets.pop();
-            } else {
-                evaluateTopUnaryFunction();
-                brackets.pop();
             }
         }
     }
 
     @Override
     public void visit(CommaLexeme lexeme) {
-        comma.push(1);
-        if (operands.size() > brackets.peek() + 1) {
-            evaluateTopBinaryFunction();
-            comma.pop();
-        }
+
     }
 
     @Override
-    public void visit(FinishLexeme lexeme) {
+    public void visit(FinishLexeme lexeme) throws EvaluationException {
+        if (!brackets.isEmpty()) {
+            throw new EvaluationException("Invalid number of parentheses.", reader.getParsePosition());
+        }
+
         while (!operators.isEmpty()) {
             evaluateTopOperator();
         }
@@ -116,15 +115,6 @@ public class EvaluationVisitor implements LexemeVisitor {
         double secondOperand = operands.pop();
 
         final double result = function.evaluate(firstOperand, secondOperand);
-        operands.push(result);
-    }
-
-    private void evaluateTopUnaryFunction() {
-        final Function function = functions.pop();
-
-        double operand = operands.pop();
-
-        final double result = function.evaluate(operand);
         operands.push(result);
     }
 

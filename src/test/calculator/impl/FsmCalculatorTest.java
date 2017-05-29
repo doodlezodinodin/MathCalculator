@@ -5,7 +5,6 @@ import calculator.EvaluationException;
 import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class FsmCalculatorTest {
 
@@ -61,18 +60,8 @@ public class FsmCalculatorTest {
     }
 
     @Test
-    public void testBracketWasNotOpen() throws EvaluationException {
-        try {
-            calculator.evaluate("2+2*2)");
-            fail("Evaluation exception was not thrown");
-        } catch (EvaluationException e) {
-            assertEquals("Wrong error position.", 5, e.getErrorPosition());
-        }
-    }
-
-    @Test
     public void testDoSanityCheck() throws EvaluationException {
-        Double result = calculator.evaluate("2");
-        assertEquals(2, result, 1);
+        Double result = calculator.evaluate("2+(2+2)*2");
+        assertEquals(10, result, 1);
     }
 }

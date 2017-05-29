@@ -18,6 +18,6 @@ public interface LexemeVisitor {
 
     void visit(CommaLexeme lexeme);
 
-    void visit(FinishLexeme lexeme);
+    void visit(FinishLexeme lexeme) throws EvaluationException;
 
 }
