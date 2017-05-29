@@ -64,7 +64,7 @@ public class EvaluationVisitor implements LexemeVisitor {
     @Override
     public void visit(CloseBracketLexeme lexeme) throws EvaluationException {
         if (brackets.isEmpty()) {
-            throw new EvaluationException("Invalid number of parentheses.", reader.getParsePosition());
+            throw new EvaluationException("Invalid number of parentheses. [error position: " + reader.getParsePosition() + "]", reader.getParsePosition());
         }
 
         final int requiredSize = brackets.pop();
@@ -89,7 +89,7 @@ public class EvaluationVisitor implements LexemeVisitor {
     @Override
     public void visit(FinishLexeme lexeme) throws EvaluationException {
         if (!brackets.isEmpty()) {
-            throw new EvaluationException("Invalid number of parentheses.", reader.getParsePosition());
+            throw new EvaluationException("Invalid number of parentheses. [error position: " + reader.getParsePosition() + "]", reader.getParsePosition());
         }
 
         while (!operators.isEmpty()) {

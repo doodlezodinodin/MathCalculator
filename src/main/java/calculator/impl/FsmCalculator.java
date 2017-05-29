@@ -40,7 +40,7 @@ public class FsmCalculator implements Calculator {
             state = moveForward(reader, state, visitor);
 
             if (state == null) {
-                throw new EvaluationException("Invalid expression format.", reader.getParsePosition());
+                throw new EvaluationException("Invalid expression format. [error position: " + reader.getParsePosition() + "]", reader.getParsePosition());
             }
 
             //LOG.info("Move to state = " + state);

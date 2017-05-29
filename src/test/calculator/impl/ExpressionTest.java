@@ -5,8 +5,9 @@ import calculator.EvaluationException;
 import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-public class FsmCalculatorTest {
+public class ExpressionTest {
 
     private Calculator calculator = new FsmCalculator();
 
@@ -36,9 +37,27 @@ public class FsmCalculatorTest {
     }
 
     @Test
+    public void testEvaluatePlusBinaryOperator() throws EvaluationException {
+        Double result = calculator.evaluate("56+30");
+        assertEquals(86, result, 0);
+    }
+
+    @Test
     public void testEvaluateMinusBinaryOperator() throws EvaluationException {
         Double result = calculator.evaluate("56-30");
         assertEquals(26, result, 0);
+    }
+
+    @Test
+    public void testEvaluateMultiplyBinaryOperator() throws EvaluationException {
+        Double result = calculator.evaluate("10*10");
+        assertEquals(100, result, 0);
+    }
+
+    @Test
+    public void testEvaluateDivideBinaryOperator() throws EvaluationException {
+        Double result = calculator.evaluate("10/10");
+        assertEquals(1, result, 0);
     }
 
     @Test
@@ -63,5 +82,15 @@ public class FsmCalculatorTest {
     public void testDoSanityCheck() throws EvaluationException {
         Double result = calculator.evaluate("2+(2+2)*2");
         assertEquals(10, result, 1);
+    }
+
+    @Test
+    public void testEvaluate() throws EvaluationException {
+        try {
+            calculator.evaluate("2++2");
+            fail();
+        } catch (EvaluationException e) {
+            assertEquals("Wrong error position.", 2, e.getErrorPosition());
+        }
     }
 }

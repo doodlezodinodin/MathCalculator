@@ -77,4 +77,22 @@ public class BracketsTest {
             assertEquals("Wrong error position.", 5, e.getErrorPosition());
         }
     }
+
+    @Test
+    public void testEvaluateNothingAfterOpenBracket() throws EvaluationException {
+        try {
+            calculator.evaluate("2+2+(");
+        } catch (EvaluationException e) {
+            assertEquals("Wrong error position.", 5, e.getErrorPosition());
+        }
+    }
+
+    @Test
+    public void testEvaluateAfterOperatorCloseBracket() throws EvaluationException {
+        try {
+            calculator.evaluate("2+)");
+        } catch (EvaluationException e) {
+            assertEquals("Wrong error position.", 3, e.getErrorPosition());
+        }
+    }
 }
