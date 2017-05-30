@@ -19,10 +19,14 @@ public class EvaluationVisitor implements LexemeVisitor {
 
     private final Deque<Integer> brackets = new ArrayDeque<>();
 
-    private ExpressionReader reader;
+    private final ExpressionReader reader;
 
-    public void setReader(ExpressionReader reader) {
+    public EvaluationVisitor(ExpressionReader reader) {
         this.reader = reader;
+    }
+
+    public ExpressionReader getReader() {
+        return reader;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class FunctionsTest {
             calculator.evaluate("sum()");
             fail();
         } catch (EvaluationException e) {
-            assertEquals("Wrong error position.", 5, e.getErrorPosition());
+            assertEquals("Wrong error position.", 4, e.getErrorPosition());
         }
     }
 

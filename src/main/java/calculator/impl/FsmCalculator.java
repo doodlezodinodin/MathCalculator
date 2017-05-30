@@ -19,7 +19,9 @@ public class FsmCalculator implements Calculator {
     @Override
     public double evaluate(String expression) throws EvaluationException {
 
-        final EvaluationVisitor visitor = new EvaluationVisitor();
+        //final ExpressionReader reader = new ExpressionReader(expression);
+
+        final EvaluationVisitor visitor = new EvaluationVisitor(new ExpressionReader(expression));
 
         if (expression == null || expression.isEmpty()) {
             throw new IllegalArgumentException("Expression is null or empty.");
@@ -27,34 +29,29 @@ public class FsmCalculator implements Calculator {
 
         //LOG.info("expression = " + expression);
 
-        final ExpressionReader reader = new ExpressionReader(expression);
-
-        visitor.setReader(reader);
-
         State state = State.START;
 
         //LOG.info("Start state = " + state);
 
         while (state != State.FINISH) {
 
-            state = moveForward(reader, state, visitor);
+            state = moveForward(state, visitor);
 
             if (state == null) {
-                throw new EvaluationException("Invalid expression format. [error position: " + reader.getParsePosition() + "]", reader.getParsePosition());
+                throw new EvaluationException("Invalid expression format. [error position: " + visitor.getReader().getParsePosition() + "]", visitor.getReader().getParsePosition());
             }
-
             //LOG.info("Move to state = " + state);
         }
 
         return visitor.getResult();
     }
 
-    private State moveForward(ExpressionReader reader, State currentState, EvaluationVisitor visitor) throws EvaluationException {
+    private State moveForward(State currentState, EvaluationVisitor visitor) throws EvaluationException {
 
         for (State possibleState : matrix.getPossibleTransitions(currentState)) {
 
             final ExpressionParser parser = parserFactory.getParser(possibleState);
-            final Lexeme lexeme = parser.parse(reader);
+            final Lexeme lexeme = parser.parse(visitor.getReader());
 
             if (lexeme != null) {
 
