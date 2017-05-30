@@ -6,7 +6,11 @@ import calculator.impl.parser.ExpressionParser;
 
 public abstract class AbstractSeparatingSymbol implements ExpressionParser {
 
-    private final String[] separatingSymbols = {"(", ")"};
+    private final String symbol;
+
+    public AbstractSeparatingSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
     @Override
     public Lexeme parse(ExpressionReader reader) {
@@ -16,15 +20,13 @@ public abstract class AbstractSeparatingSymbol implements ExpressionParser {
 
         final String remainingExpression = reader.getRemainingExpression();
 
-        for (int i = 0; i < separatingSymbols.length; i++) {
-            if (remainingExpression.startsWith(separatingSymbols[i])) {
-                reader.moveParsePosition(separatingSymbols[i].length());
+        if (remainingExpression.startsWith(symbol)) {
 
-                if (separatingSymbols[i] == ",") System.out.println("true");
+            reader.moveParsePosition(symbol.length());
 
-                return createLexeme();
-            }
+            return createLexeme();
         }
+
         return null;
     }
 

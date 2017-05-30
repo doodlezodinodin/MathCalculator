@@ -34,7 +34,7 @@ public class BracketsTest {
             calculator.evaluate("()");
             fail();
         } catch (EvaluationException e) {
-            assertEquals("Wrong error position.", 2, e.getErrorPosition());
+            assertEquals("Wrong error position.", 1, e.getErrorPosition());
         }
     }
 
@@ -64,7 +64,7 @@ public class BracketsTest {
             calculator.evaluate("2+2(2+2)");
             fail();
         } catch (EvaluationException e) {
-            assertEquals("Wrong error position.", 4, e.getErrorPosition());
+            assertEquals("Wrong error position.", 3, e.getErrorPosition());
         }
     }
 
@@ -92,7 +92,7 @@ public class BracketsTest {
         try {
             calculator.evaluate("2+)");
         } catch (EvaluationException e) {
-            assertEquals("Wrong error position.", 3, e.getErrorPosition());
+            assertEquals("Wrong error position.", 2, e.getErrorPosition());
         }
     }
 }

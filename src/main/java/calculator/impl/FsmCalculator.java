@@ -46,13 +46,10 @@ public class FsmCalculator implements Calculator {
             //LOG.info("Move to state = " + state);
         }
 
-        if (state == State.FINISH && reader.getRemainingExpression().length() > 0)
-            throw new EvaluationException("Invalid character after open bracket. [error position: " + reader.getParsePosition() + "]" , reader.getParsePosition());
-
         return visitor.getResult();
     }
 
-    private State moveForward(ExpressionReader reader, State currentState, EvaluationVisitor visitor) throws EvaluationException{
+    private State moveForward(ExpressionReader reader, State currentState, EvaluationVisitor visitor) throws EvaluationException {
 
         for (State possibleState : matrix.getPossibleTransitions(currentState)) {
 
