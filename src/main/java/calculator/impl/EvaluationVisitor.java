@@ -11,13 +11,12 @@ import java.util.*;
 
 public class EvaluationVisitor implements LexemeVisitor {
 
-    private final Deque<Double> operands = new ArrayDeque<>();
-
+    /*private final Deque<Double> operands = new ArrayDeque<>();
     private final Deque<Function> functions = new ArrayDeque<>();
-
     private final Deque<BinaryOperator> operators = new ArrayDeque<>();
+    private final Deque<Integer> brackets = new ArrayDeque<>();*/
 
-    private final Deque<Integer> brackets = new ArrayDeque<>();
+    private final Deque<FunctionContext> functionContexts = new ArrayDeque<>();
 
     private final ExpressionReader reader;
 
@@ -60,9 +59,7 @@ public class EvaluationVisitor implements LexemeVisitor {
 
     @Override
     public void visit(OpenBracketLexeme lexeme) {
-        if (!functions.isEmpty()) brackets.push(operands.size());
-        else brackets.push(operators.size());
-
+        brackets.push(operators.size());
     }
 
     @Override
@@ -75,13 +72,6 @@ public class EvaluationVisitor implements LexemeVisitor {
 
         while (operators.size() > requiredSize) {
             evaluateTopOperator();
-        }
-
-        while (functions.size() > functions.size() - 1 && operands.size() > requiredSize + 1) {
-            evaluateTopBinaryFunction();
-            if (operands.size() == requiredSize + 1) {
-                functions.pop();
-            }
         }
     }
 
@@ -112,15 +102,19 @@ public class EvaluationVisitor implements LexemeVisitor {
         operands.push(result);
     }
 
-    private void evaluateTopBinaryFunction() {
-        final Function function = functions.peek();
+    /*private void evaluateTopFunction() {
 
-        double firstOperand = operands.pop();
-        double secondOperand = operands.pop();
+        final Function function = functions.pop();
 
-        final double result = function.evaluate(firstOperand, secondOperand);
+        double[] numbers = new double[operands.size() - bracketsFunction.peek()];
+
+        for (int i = 0; i < operands.size() - bracketsFunction.peek(); i++) {
+            numbers[i] = operands.pop();
+        }
+
+        final double result = function.evaluate(numbers);
         operands.push(result);
-    }
+    }*/
 
     public double getResult() {
         return operands.pop();
