@@ -11,10 +11,10 @@ import java.util.*;
 
 public class EvaluationVisitor implements LexemeVisitor {
 
-    /*private final Deque<Double> operands = new ArrayDeque<>();
+    private final Deque<Double> operands = new ArrayDeque<>();
     private final Deque<Function> functions = new ArrayDeque<>();
     private final Deque<BinaryOperator> operators = new ArrayDeque<>();
-    private final Deque<Integer> brackets = new ArrayDeque<>();*/
+    private final Deque<Integer> brackets = new ArrayDeque<>();
 
     private final Deque<FunctionContext> functionContexts = new ArrayDeque<>();
 

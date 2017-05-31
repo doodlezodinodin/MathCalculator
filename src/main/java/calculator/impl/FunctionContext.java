@@ -8,7 +8,7 @@ import java.util.Deque;
 
 public class FunctionContext {
 
-    private Deque<Double> operands = new ArrayDeque<>();
+    private final Deque<Double> operands = new ArrayDeque<>();
 
     private final Deque<Function> functions = new ArrayDeque<>();
 
